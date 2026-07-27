@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 d-flex align-items-center justify-content-between mb-1">
-                    <h1>Student Management</h1>
+                    <h1><i class="fas fa-user-graduate"></i> Student Management</h1>
                     <a class="btn btn-primary btn-sm" href="#AddPart" data-toggle="modal" data-target="#AddPart">Tambah Data</a>
                 </div>
                 <div class="col-lg-12">
@@ -34,7 +34,7 @@
                                         <a class="btn btn-primary btn-sm mx-1" href="#EditPart{{ $student->id }}"
                                             data-toggle="modal" data-target="#EditPart{{ $student->id }}">Edit</a>
                                         <a class="btn btn-danger btn-sm mx-1"
-                                            href="{{ url('student/hapus/' . $student->id) }}"
+                                            href="{{ route('student.hapus', $student->id) }}"
                                             onclick="return confirm('Data akan dihapus?')">Hapus</a>
                                     </td>
                                 </tr>
@@ -48,13 +48,14 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h3 class="modal-title" id="myModalLabel">Add Data</h3>
-                                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
-                                        <i class="fa-solid fa-x"></i>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        {{-- <i class="fas fa-times"></i> --}}
                                     </button>
                                 </div>
                                 <div class="modal-body">
                                     <form class="form-horizontal" enctype="multipart/form-data" method="post"
-                                        action="{{ url('student/simpan') }}">
+                                        action="{{ route('student.simpan') }}">
                                         @csrf
                                         <div class="row">
                                             <div class="col-12">
@@ -89,6 +90,60 @@
                             </div>
                         </div>
                     </div>
+
+                    {{-- Edit Sparepart --}}
+                    @foreach ($students as $item)
+                        <div class="modal fade" id="EditPart{{ $item->id }}" role="dialog" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h3 class="modal-title" id="myModalLabel">Edit Data</h3>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="form-horizontal" enctype="multipart/form-data" method="post"
+                                            action="{{ route('student.update', $item->id) }}">
+                                            @csrf
+                                            <div class="row">
+                                                <input name="id" type="hidden" value="{{ $item->id }}"
+                                                    class="form-control" readonly>
+                                                <div class="col-12">
+                                                    <fieldset class="form-group">
+                                                        <label class="form-label">Name</label>
+                                                        <input name="name" type="text" class="form-control"
+                                                            placeholder="John Doe" value="{{ $item->name }}">
+                                                    </fieldset>
+                                                    <fieldset class="form-group">
+                                                        <label class="form-label">Email</label>
+                                                        <input name="email" type="email" class="form-control"
+                                                            placeholder="Email address" value="{{ $item->email }}">
+                                                    </fieldset>
+                                                    <fieldset class="form-group">
+                                                        <label class="form-label">Phone</label>
+                                                        <input name="phone" type="tel" class="form-control"
+                                                            placeholder=" Phone number" value="{{ $item->phone }}">
+                                                    </fieldset>
+                                                    <fieldset class="form-group">
+                                                        <label class="form-label">Address</label>
+                                                        <textarea name="address" class="form-control" placeholder="Address">{{ $item->address }}</textarea>
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                {{-- <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button> --}}
+                                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+
                 </div>
             </div>
         </div>

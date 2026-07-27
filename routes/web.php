@@ -5,7 +5,6 @@ use App\Http\Controllers\BelajarController;
 use App\Http\Controllers\Admin\StudentController;
 
 Route::resource('/', \App\Http\Controllers\HomeController::class);
-Route::get('dashboard',[\App\Http\Controllers\AdminController::class, 'index'])->name('admin');
 
 // GET, POST, PUT, PATCH, DELETE
 //GET : Hanya membaca atau melihat, tidak ada aksi request ke form
@@ -24,15 +23,31 @@ Route::post('store-kali',[BelajarController::class, 'storeKali'])->name('store-k
 Route::get('pembagian',[BelajarController::class, 'bagi'])->name('pembagian');
 Route::post('store-bagi',[BelajarController::class, 'storeBagi'])->name('store-bagi');
 
-//PREFIX
-Route::get('login', [\App\Http\Controllers\LoginController::class, 'login']);
+//PREFIX Admin
+
+Route::get('login', [\App\Http\Controllers\LoginController::class, 'login'])->name('login');
 Route::post('action-login', [\App\Http\Controllers\LoginController::class, 'actionLogin'])->name('action-login');
-Route::prefix('admin')->group(function() {
-    Route::resource('/dashboard',   \App\Http\Controllers\Admin\DashboardController::class);
+Route::get('logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
+
+// Route::prefix('admin')->group(function() {
+//     Route::resource('dashboard', \App\Http\Controllers\Admin\DashboardController::class);
+// });
+
+Route::prefix('admin')->middleware('auth')->group(function() {
+    Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('student', [StudentController::class, 'index'])->name('student');
+    Route::post('student/simpan', [StudentController::class, 'simpan'])->name('student.simpan');
+    Route::post('student/update/{id}', [StudentController::class, 'update'])->name('student.update');
+    Route::get('student/hapus/{id}', [StudentController::class, 'hapus'])->name('student.hapus');
+    Route::get('logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
 });
+// Route::get('dashboard',[\App\Http\Controllers\AdminController::class, 'index'])->name('admin');
 
 // Student
-Route::get('student', [StudentController::class, 'index'])->name('student');
-Route::post('student/simpan', [StudentController::class, 'simpan']);
-Route::post('student/update/{id}', [StudentController::class, 'update']);
-Route::get('student/hapus/{id}', [StudentController::class, 'hapus']);
+// Route::get('student', [StudentController::class, 'index'])->name('student');
+// Route::post('student/simpan', [StudentController::class, 'simpan']);
+// Route::post('student/update/{id}', [StudentController::class, 'update'])->name('student.update');
+// Route::get('student/hapus/{id}', [StudentController::class, 'hapus']);
+
+Route::get('register', [App\Http\Controllers\RegisterController::class, 'register'])->name('register');
+Route::post('action-register', [App\Http\Controllers\RegisterController::class, 'actionRegister'])->name('action-register');
