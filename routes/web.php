@@ -34,12 +34,15 @@ Route::get('logout', [App\Http\Controllers\LoginController::class, 'logout'])->n
 // });
 
 Route::prefix('admin')->middleware('auth')->group(function() {
-    Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('dashboard', \App\Http\Controllers\Admin\DashboardController::class);
+    // Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
     Route::get('student', [StudentController::class, 'index'])->name('student');
     Route::post('student/simpan', [StudentController::class, 'simpan'])->name('student.simpan');
     Route::post('student/update/{id}', [StudentController::class, 'update'])->name('student.update');
     Route::get('student/hapus/{id}', [StudentController::class, 'hapus'])->name('student.hapus');
     Route::get('logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
+    Route::resource('contact', \App\Http\Controllers\Admin\ContactController::class);
+    Route::resource('blog', \App\Http\Controllers\Admin\BlogController::class);
 });
 // Route::get('dashboard',[\App\Http\Controllers\AdminController::class, 'index'])->name('admin');
 
@@ -51,3 +54,6 @@ Route::prefix('admin')->middleware('auth')->group(function() {
 
 Route::get('register', [App\Http\Controllers\RegisterController::class, 'register'])->name('register');
 Route::post('action-register', [App\Http\Controllers\RegisterController::class, 'actionRegister'])->name('action-register');
+
+
+Route::get('donut', [App\Http\Controllers\DonutController::class, 'index']);

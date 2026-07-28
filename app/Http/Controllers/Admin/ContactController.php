@@ -4,16 +4,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Contact;
 
-class DashboardController extends Controller
+class ContactController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $title = "Admin Dashboard";
-        return view('admin.dashboard.index', compact('title'));
+        $contacts = Contact::get(); //Select * from Contact
+        //$contacts = Contact::all(); // Berat
+        $title = "Data Contact Us";
+        return view('admin.contact.index', compact('contacts', 'title'));
     }
 
     /**
