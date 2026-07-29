@@ -13,7 +13,8 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $contacts = Contact::get(); //Select * from Contact
+        //$contacts = Contact::get(); //Select * from Contact
+        $contacts = Contact::paginate(10);
         //$contacts = Contact::all(); // Berat
         $title = "Data Contact Us";
         return view('admin.contact.index', compact('contacts', 'title'));
@@ -32,7 +33,15 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Contact::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'subject' => $request->subject,
+            'message' => $request->message,
+        ]);
+
+        // return redirect()->to('/');
+        return redirect()->back()->with('success', 'Your message has been sent successfully!');
     }
 
     /**
@@ -64,6 +73,8 @@ class ContactController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $contact = Contact::findOrFail($id);
+        $contact->delete();
+        return redirect()->back()->with('success', 'Blog deleted successfully');
     }
 }

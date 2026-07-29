@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Blog;
 
 class HomeController extends Controller
 {
@@ -11,7 +12,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home.index');
+        $blogs = Blog::where('is_active', 1)->limit(3)->inRandomOrder()->get();
+        return view('home.index', compact('blogs'));
     }
 
     /**

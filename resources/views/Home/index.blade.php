@@ -127,6 +127,20 @@
     	</div>
     </section>
 
+    <section class="ftco-section" id="blog-section">
+        <div class="container">
+            <div class="row">
+                @foreach ($blogs as $item)
+                    <a href="{{ url('/detail', $item->id) }}" class="col-md-4">
+                        <img src="{{ asset('storage/' . $item->photo) }}" alt="" class="card-image-top img-fluid" style="height: 200px; object-fit: cover; object-position: center;">
+                        <h4>{{ $item->title }}</h4>
+                        <p>{{ Str::limit($item->content, 100, '...') }}</p>
+                    </a>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
     <section class="ftco-section ftco-no-pb" id="resume-section">
     	<div class="container">
     		<div class="row justify-content-center pb-5">
@@ -584,18 +598,19 @@
 
         <div class="row no-gutters block-9">
           <div class="col-md-6 order-md-last d-flex">
-            <form action="#" class="bg-light p-4 p-md-5 contact-form">
+            <form action="{{ route('contact.submit') }}" method="post" class="bg-light p-4 p-md-5 contact-form">
+                @csrf
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Your Name">
+                <input type="text" name="name" class="form-control" placeholder="Your Name">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Your Email">
+                <input type="text" name="email" class="form-control" placeholder="Your Email">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Subject">
+                <input type="text" name="subject" class="form-control" placeholder="Subject">
               </div>
               <div class="form-group">
-                <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+                <textarea name="message" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
               </div>
               <div class="form-group">
                 <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">

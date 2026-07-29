@@ -35,9 +35,10 @@
                                     <td>{{ $blog->is_active }}</td>
                                     <td class="text-center">
                                         <a class="btn btn-primary btn-sm mx-1" href="{{ route('blog.edit', $blog->id) }}">Edit</a>
-                                        <form action="" method="post" class="d-inline">
+                                        <form action="{{ route('blog.destroy', $blog->id) }}" method="post" class="d-inline">
                                             @csrf
-                                            <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                                            @method('delete')
+                                            <button onclick="return confirm('Data akan dihapus?')" class="btn btn-danger btn-sm" type="submit">Delete</button>
                                         </form>
                                     </td>
                                 </tr>

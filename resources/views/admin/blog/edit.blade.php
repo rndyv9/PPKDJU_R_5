@@ -32,10 +32,10 @@
                             </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Status :</label>
-                                <input type="radio" name="is_active" value="1" checked>Publish
-                                <input type="radio" name="is_active" value="0">Draft
+                                <input type="radio" name="is_active" value="1" {{ $blog->is_active == 1 ? 'checked' : '' }}>Publish
+                                <input type="radio" name="is_active" value="0" {{ $blog->is_active == 0 ? 'checked' : '' }}>Draft
                             </div>
-                            <button class="btn btn-primary" type="submit">Save</button>
+                            <button class="btn btn-primary form-control" type="submit">Save</button>
                         </form>
                     </div>
                 </div>

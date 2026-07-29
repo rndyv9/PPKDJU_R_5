@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Blog;
+use Illuminate\Support\Facades\Storage;
+
 
 class BlogController extends Controller
 {
@@ -72,17 +74,20 @@ class BlogController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'title' => 'required',
+            'sub_content' => 'required',
+            'content' => 'required',
+            'is_active' => 'required|boolean',
+        ]);
 
         $blog = Blog::findOrFail($id);
         $photo = $blog->photo;
 
         if($request->hasFile('photo')) {
-
-            // Optional but recommended: Delete the old photo from storage to save space
-            // if ($blog->photo && Storage::disk('public')->exists($blog->photo)) {
-            //     Storage::disk('public')->delete($blog->photo);
-            // }
-
+            if ($blog->photo) {
+                Storage::disk('public')->delete($blog->photo);
+            }
             $photo = $request->file('photo')->store('blog', 'public');
         }
 
@@ -92,10 +97,10 @@ class BlogController extends Controller
             'content' => $request->content,
             'photo' => $photo,
             'is_active' => $request->is_active,
-            'author' => auth()->user()->name,
+            //'author' => auth()->user()->name,
         ]);
 
-        return redirect()->to('admin/blog');
+        return redirect()->to('admin/blog')->with('success', 'Blog updated successfully');
     }
 
     /**
@@ -103,6 +108,11 @@ class BlogController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $blog = Blog::findOrFail($id);
+        if($blog->photo) {
+            Storage::disk('public')->delete($blog->photo);
+        }
+        $blog->delete();
+        return redirect()->to('admin/blog')->with('success', 'Blog deleted successfully');
     }
 }

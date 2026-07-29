@@ -36,11 +36,19 @@
                                         <a class="btn btn-danger btn-sm mx-1"
                                             href="{{ route('student.hapus', $student->id) }}"
                                             onclick="return confirm('Data akan dihapus?')">Hapus</a> --}}
+                                        <form action="{{ route('contact.destroy', $contact->id) }}" method="post" class="d-inline">
+                                            @csrf
+                                            @method('delete')
+                                            <button onclick="return confirm('Data akan dihapus?')" class="btn btn-danger btn-sm" type="submit">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="mb-3">
+                        {{ $contacts->links() }}
+                    </div>
                     </div>
                 </div>
             </div>

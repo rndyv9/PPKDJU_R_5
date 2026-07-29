@@ -41,6 +41,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="mb-3">
+                        {{ $students->links() }}
+                    </div>
                     {{-- Add Part --}}
                     <div class="modal fade" id="AddPart" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
