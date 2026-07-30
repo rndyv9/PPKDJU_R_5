@@ -31,7 +31,8 @@ Route::get('logout', [App\Http\Controllers\LoginController::class, 'logout'])->n
 
 Route::post('/contact-submit', [\App\Http\Controllers\Admin\ContactController::class, 'store'])->name('contact.submit');
 
-Route::get('detail/{id}', [App\Http\Controllers\DetailController::class, 'index'])->name('detail');
+// Route::get('detail/{id}', [App\Http\Controllers\DetailController::class, 'index'])->name('detail');
+Route::get('detail/{blog}', [App\Http\Controllers\HomeController::class, 'show'])->name('home.blog.detail');
 
 // Admin
 Route::prefix('admin')->middleware('auth')->group(function() {

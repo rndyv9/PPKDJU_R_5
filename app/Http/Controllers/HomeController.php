@@ -35,9 +35,11 @@ class HomeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(blog $blog)
     {
-        //
+
+        // dd($blog);
+        return view('home.detail', compact('blog'));
     }
 
     /**

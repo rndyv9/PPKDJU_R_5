@@ -131,7 +131,7 @@
         <div class="container">
             <div class="row">
                 @foreach ($blogs as $item)
-                    <a href="{{ url('/detail', $item->id) }}" class="col-md-4">
+                    <a href="{{ route('home.blog.detail', $item) }}" class="col-md-4">
                         <img src="{{ asset('storage/' . $item->photo) }}" alt="" class="card-image-top img-fluid" style="height: 200px; object-fit: cover; object-position: center;">
                         <h4>{{ $item->title }}</h4>
                         <p>{{ Str::limit($item->content, 100, '...') }}</p>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Blog;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 
 class BlogController extends Controller
@@ -41,7 +42,8 @@ class BlogController extends Controller
 
         Blog::create([
             'title' => $request->title,
-            'sub_content' => $request->sub_content,
+            // 'sub_content' => $request->sub_content,
+            'sub_conteant' => str::slug($request->title),
             'content' => $request->content,
             'photo' => $photo,
             'is_active' => $request->is_active,
@@ -93,7 +95,7 @@ class BlogController extends Controller
 
         $blog->update([
             'title' => $request->title,
-            'sub_content' => $request->sub_content,
+            'sub_content' => str::slug($request->title),
             'content' => $request->content,
             'photo' => $photo,
             'is_active' => $request->is_active,

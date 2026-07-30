@@ -27,6 +27,7 @@ class RegisterController extends Controller
             $user->name = $request->input('fname') . ' ' . $request->input('lname');
             $user->email = $request->input('email');
             $user->password = bcrypt($request->input('password'));
+            $user->role = 'user';
             $user->save();
             return redirect()->route('login')->with('success', 'Registration successful. Please log in');
         }

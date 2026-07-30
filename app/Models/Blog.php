@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Override;
 
 class Blog extends Model
 {
@@ -15,4 +16,9 @@ class Blog extends Model
         'date',
         'photo',
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'sub_content';
+    }
 }
