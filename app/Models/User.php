@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Role;
 
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
@@ -29,4 +30,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function role() {
+        //return $this->belongsTo(Role::class, 'id_role', 'id'); // untuk nama foreign key custom, ex: id_peran etc
+        return $this->belongsTo(Role::class); //nama foreign key = nama tabel + _id, ex: role_id
+    }
+    protected $fillable = [
+        'role_id'
+    ];
 }

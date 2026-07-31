@@ -42,8 +42,9 @@
                                     <span class="bg-danger text-white p-2 rounded">{{ $message }}</span>
                                 @enderror
                             </div>
-                            @csrf
+
                             <form class="user" method="post" action="{{ route('action-register') }}">
+                                @csrf
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" name="fname" class="form-control form-control-user" id="fnama"

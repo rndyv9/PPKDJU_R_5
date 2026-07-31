@@ -46,6 +46,14 @@ Route::prefix('admin')->middleware('auth')->group(function() {
         Route::get('hapus/{id}', [StudentController::class, 'hapus'])->name('student.hapus');
     });
 
+    //User
+    Route::prefix('user')->group(function() {
+        Route::get('', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('user');
+        Route::post('simpan', [App\Http\Controllers\Admin\UserController::class, 'simpan'])->name('user.simpan');
+        Route::post('update/{id}', [App\Http\Controllers\Admin\UserController::class, 'update'])->name('user.update');
+        Route::get('hapus/{id}', [App\Http\Controllers\Admin\UserController::class, 'hapus'])->name('user.hapus');
+    });
+
     Route::get('logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
     Route::resource('contact', \App\Http\Controllers\Admin\ContactController::class);
     Route::resource('blog', \App\Http\Controllers\Admin\BlogController::class);
