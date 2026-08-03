@@ -95,13 +95,24 @@
 
     @include('_inc.js')
     <script>
+        DataTable.Buttons.defaults.dom.button.className = 'btn';
         new DataTable('#student', {
             fixedHeader: true,
             responsive: true,
             layout:{
-                // topStart:{
-                //     buttons: ['copy'. 'excel', 'csv'. 'pdf', 'print']
-                // },
+                topStart:{
+                    buttons: [
+                { extend: 'copy', className: 'btn btn-primary' },
+                { extend: 'excel',  className: 'btn btn-primary' },
+                { extend: 'csv', text: 'CSV', className: 'btn btn-primary' },
+                { extend: 'pdf', text: 'PDF', className: 'btn btn-primary',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3]
+                    }
+                 },
+                { extend: 'print', text: 'Print', className: 'btn btn-primary' }
+            ]
+                },
                 topEnd: 'search',
             }
         });

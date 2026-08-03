@@ -57,6 +57,9 @@ Route::prefix('admin')->middleware('auth')->group(function() {
     Route::get('logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
     Route::resource('contact', \App\Http\Controllers\Admin\ContactController::class);
     Route::resource('blog', \App\Http\Controllers\Admin\BlogController::class);
+
+    // Route::get('mata-pelajaran/hapus/{id}', [\App\Http\Controllers\Admin\MatapelajaranController::class, 'destroy'])->name('mata-pelajaran-hapus');
+    Route::resource('mata-pelajaran', \App\Http\Controllers\Admin\MatapelajaranController::class);
 });
 // Route::get('dashboard',[\App\Http\Controllers\AdminController::class, 'index'])->name('admin');
 

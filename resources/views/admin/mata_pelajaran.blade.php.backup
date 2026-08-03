@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 d-flex align-items-center justify-content-between mb-1">
-                    <h1><i class="fas fa-user-graduate"></i> Student Management</h1>
+                    <h1><i class="fas fa-book"></i> Mata pelajaran Management</h1>
                     <a class="btn btn-primary btn-sm" href="#AddPart" data-toggle="modal" data-target="#AddPart">Tambah Data</a>
                 </div>
                 <div class="col-lg-12">
@@ -15,27 +15,22 @@
                         <thead class="bg-white">
                             <tr>
                                 {{-- <th>No</th> --}}
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Address</th>
-                                <th class="text-center">Action</th>
+                                <th>Name</th><th class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($students as $index => $student)
+                            @foreach ($mata_pelajarans as $index => $mata_pelajaran)
                                 <tr>
                                     {{-- <td class="text-center">{{ ($students->currentPage() - 1) * $students->perPage() + $loop->iteration }}</td> --}}
-                                    <td>{{ $student->name }}</td>
-                                    <td>{{ $student->email }}</td>
-                                    <td>{{ $student->phone }}</td>
-                                    <td>{{ $student->address }}</td>
+                                    <td>{{ $mata_pelajaran->nama_pelajaran }}</td>
                                     <td class="text-center">
-                                        <a class="btn btn-primary btn-sm mx-1" href="#EditPart{{ $student->id }}"
-                                            data-toggle="modal" data-target="#EditPart{{ $student->id }}">Edit</a>
-                                        <a class="btn btn-danger btn-sm mx-1"
-                                            href="{{ route('student.hapus', $student->id) }}"
-                                            onclick="return confirm('Data akan dihapus?')">Hapus</a>
+                                        <a class="btn btn-primary btn-sm mx-1" href="#EditPart{{ $mata_pelajaran->id }}"
+                                            data-toggle="modal" data-target="#EditPart{{ $mata_pelajaran->id }}">Edit</a>
+                                        {{-- <a class="btn btn-danger btn-sm mx-1"
+                                            href="{{ route('mata-pelajaran-hapus', $mata_pelajaran->id) }}"
+                                            onclick="return confirm('Data akan dihapus?')">Hapus</a> --}}
+
+                                        <x-delete_button :route="route('mata-pelajaran.destroy', $mata_pelajaran->id)" />
                                     </td>
                                 </tr>
                             @endforeach
@@ -58,28 +53,14 @@
                                 </div>
                                 <div class="modal-body">
                                     <form class="form-horizontal" enctype="multipart/form-data" method="post"
-                                        action="{{ route('student.simpan') }}">
+                                        action="{{ route('mata-pelajaran.store') }}">
                                         @csrf
                                         <div class="row">
                                             <div class="col-12">
                                                 <fieldset class="form-group">
-                                                    <label class="form-label">Name</label>
-                                                    <input name="name" type="text" class="form-control"
+                                                    <label class="form-label">Nama pelajaran</label>
+                                                    <input name="nama_pelajaran" type="text" class="form-control"
                                                         placeholder="John Doe">
-                                                </fieldset>
-                                                <fieldset class="form-group">
-                                                    <label class="form-label">Email</label>
-                                                    <input name="email" type="email" class="form-control"
-                                                        placeholder="Email address">
-                                                </fieldset>
-                                                <fieldset class="form-group">
-                                                    <label class="form-label">Phone</label>
-                                                    <input name="phone" type="tel" class="form-control"
-                                                        placeholder=" Phone number">
-                                                </fieldset>
-                                                <fieldset class="form-group">
-                                                    <label class="form-label">Address</label>
-                                                    <textarea name="address" class="form-control" placeholder="Address"></textarea>
                                                 </fieldset>
                                             </div>
                                         </div>
@@ -95,7 +76,7 @@
                     </div>
 
                     {{-- Edit Sparepart --}}
-                    @foreach ($students as $item)
+                    @foreach ($mata_pelajarans as $item)
                         <div class="modal fade" id="EditPart{{ $item->id }}" role="dialog" tabindex="-1"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg" role="document">
@@ -108,30 +89,17 @@
                                     </div>
                                     <div class="modal-body">
                                         <form class="form-horizontal" enctype="multipart/form-data" method="post"
-                                            action="{{ route('student.update', $item->id) }}">
+                                            action="{{ route('mata-pelajaran.update', $item->id) }}">
                                             @csrf
+                                            @method('put')
                                             <div class="row">
                                                 <input name="id" type="hidden" value="{{ $item->id }}"
                                                     class="form-control" readonly>
                                                 <div class="col-12">
                                                     <fieldset class="form-group">
-                                                        <label class="form-label">Name</label>
-                                                        <input name="name" type="text" class="form-control"
-                                                            placeholder="John Doe" value="{{ $item->name }}">
-                                                    </fieldset>
-                                                    <fieldset class="form-group">
-                                                        <label class="form-label">Email</label>
-                                                        <input name="email" type="email" class="form-control"
-                                                            placeholder="Email address" value="{{ $item->email }}">
-                                                    </fieldset>
-                                                    <fieldset class="form-group">
-                                                        <label class="form-label">Phone</label>
-                                                        <input name="phone" type="tel" class="form-control"
-                                                            placeholder=" Phone number" value="{{ $item->phone }}">
-                                                    </fieldset>
-                                                    <fieldset class="form-group">
-                                                        <label class="form-label">Address</label>
-                                                        <textarea name="address" class="form-control" placeholder="Address">{{ $item->address }}</textarea>
+                                                        <label class="form-label">Nama pelajaran</label>
+                                                        <input name="nama_pelajaran" type="text" class="form-control"
+                                                            placeholder="John Doe" value="{{ $item->nama_pelajaran }}">
                                                     </fieldset>
                                                 </div>
                                             </div>
