@@ -65,6 +65,7 @@
         <!-- End of Content Wrapper -->
 
     </div>
+
     <!-- End of Page Wrapper -->
 
     <!-- Scroll to Top Button-->
@@ -93,6 +94,18 @@
     </div>
 
     @include('_inc.js')
+    <script>
+        new DataTable('#student', {
+            fixedHeader: true,
+            responsive: true,
+            layout:{
+                // topStart:{
+                //     buttons: ['copy'. 'excel', 'csv'. 'pdf', 'print']
+                // },
+                topEnd: 'search',
+            }
+        });
+    </script>
 </body>
 
 </html>

@@ -14,7 +14,7 @@
                     <table id="student" class="table table-bordered table-striped tblack" style="color: #000 !important;">
                         <thead class="bg-white">
                             <tr>
-                                <th>No</th>
+                                {{-- <th>No</th> --}}
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
@@ -25,7 +25,7 @@
                         <tbody>
                             @foreach ($students as $index => $student)
                                 <tr>
-                                    <td class="text-center">{{ ($students->currentPage() - 1) * $students->perPage() + $loop->iteration }}</td>
+                                    {{-- <td class="text-center">{{ ($students->currentPage() - 1) * $students->perPage() + $loop->iteration }}</td> --}}
                                     <td>{{ $student->name }}</td>
                                     <td>{{ $student->email }}</td>
                                     <td>{{ $student->phone }}</td>
@@ -41,9 +41,9 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         {{ $students->links() }}
-                    </div>
+                    </div> --}}
                     {{-- Add Part --}}
                     <div class="modal fade" id="AddPart" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
@@ -146,7 +146,6 @@
                             </div>
                         </div>
                     @endforeach
-
                 </div>
             </div>
         </div>
