@@ -57,6 +57,7 @@ Route::prefix('admin')->middleware('auth')->group(function() {
     Route::get('logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
     Route::resource('contact', \App\Http\Controllers\Admin\ContactController::class);
     Route::resource('blog', \App\Http\Controllers\Admin\BlogController::class);
+    Route::resource('about', \App\Http\Controllers\Admin\AboutController::class);
 
     // Route::get('mata-pelajaran/hapus/{id}', [\App\Http\Controllers\Admin\MatapelajaranController::class, 'destroy'])->name('mata-pelajaran-hapus');
     Route::resource('mata-pelajaran', \App\Http\Controllers\Admin\MatapelajaranController::class);
@@ -65,3 +66,5 @@ Route::prefix('admin')->middleware('auth')->group(function() {
 
 // Donut V
 Route::get('donut', [App\Http\Controllers\DonutController::class, 'index']);
+Route::get('kalkulator', [App\Http\Controllers\KalkulatorController::class, 'index']);
+Route::post('operation', [App\Http\Controllers\KalkulatorController::class, 'operation'])->name('operation');

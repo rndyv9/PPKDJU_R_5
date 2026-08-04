@@ -27,7 +27,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="index.html">Clark</a>
+	      <a class="navbar-brand" href="index.html">{{ $about->name }}</a>
 	      <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
@@ -58,8 +58,8 @@
 		          <div class="one-forth d-flex  align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
 		          	<div class="text">
 		          		<span class="subheading">Hello!</span>
-			            <h1 class="mb-4 mt-3">I'm <span>Clark Thompson</span></h1>
-			            <h2 class="mb-4">A Freelance Web Designer</h2>
+			            <h1 class="mb-4 mt-3">I'm <span>{{ $about->name }}</span></h1>
+			            <h2 class="mb-4">A Web Developer</h2>
 			            <p><a href="#" class="btn btn-primary py-3 px-4">Hire me</a> <a href="#" class="btn btn-white btn-outline-white py-3 px-4">My works</a></p>
 		            </div>
 		          </div>
@@ -77,7 +77,7 @@
 		          <div class="one-forth d-flex align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
 		          	<div class="text">
 		          		<span class="subheading">Hello!</span>
-			            <h1 class="mb-4 mt-3">I'm a <span>web designer</span> based in London</h1>
+			            <h1 class="mb-4 mt-3">I'm a <span>web developer</span> based in Jakarta</h1>
 			            <p><a href="#" class="btn btn-primary py-3 px-4">Hire me</a> <a href="#" class="btn btn-white btn-outline-white py-3 px-4">My works</a></p>
 		            </div>
 		          </div>
@@ -104,12 +104,12 @@
 		            <h2 class="mb-4">About Me</h2>
 		            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
 		            <ul class="about-info mt-4 px-md-0 px-2">
-		            	<li class="d-flex"><span>Name:</span> <span>Clark Thompson</span></li>
-		            	<li class="d-flex"><span>Date of birth:</span> <span>January 01, 1987</span></li>
-		            	<li class="d-flex"><span>Address:</span> <span>San Francisco CA 97987 USA</span></li>
-		            	<li class="d-flex"><span>Zip code:</span> <span>1000</span></li>
-		            	<li class="d-flex"><span>Email:</span> <span>clarkthomp@gmail.com</span></li>
-		            	<li class="d-flex"><span>Phone: </span> <span>+1-2234-5678-9-0</span></li>
+		            	<li class="d-flex"><span>Name:</span> <span>{{ $about->name }}</span></li>
+		            	<li class="d-flex"><span>Date of birth:</span> <span>{{ $about->birthday->format('d F, Y') }}</span></li>
+		            	<li class="d-flex"><span>Address:</span> <span>{{ $about->address }}</span></li>
+		            	<li class="d-flex"><span>Zip code:</span> <span>{{ $about->postal_code }}</span></li>
+		            	<li class="d-flex"><span>Email:</span> <span>{{ $about->email }}</span></li>
+		            	<li class="d-flex"><span>Phone: </span> <span>{{ $about->telp }}</span></li>
 		            </ul>
 		          </div>
 		        </div>
@@ -564,7 +564,7 @@
           			<span class="icon-map-signs"></span>
           		</div>
           		<h3 class="mb-4">Address</h3>
-	            <p>198 West 21th Street, Suite 721 New York NY 10016</p>
+	            <p>{{ $about->address }}</p>
 	          </div>
           </div>
           <div class="col-md-6 col-lg-3 d-flex ftco-animate">
@@ -573,7 +573,7 @@
           			<span class="icon-phone2"></span>
           		</div>
           		<h3 class="mb-4">Contact Number</h3>
-	            <p><a href="tel://1234567920">+ 1235 2355 98</a></p>
+	            <p><a href="tel://085714509894">{{ $about->telp }}</a></p>
 	          </div>
           </div>
           <div class="col-md-6 col-lg-3 d-flex ftco-animate">
@@ -582,7 +582,7 @@
           			<span class="icon-paper-plane"></span>
           		</div>
           		<h3 class="mb-4">Email Address</h3>
-	            <p><a href="mailto:info@yoursite.com">info@yoursite.com</a></p>
+	            <p><a href="mailto:info@yoursite.com">{{ $about->email }}</a></p>
 	          </div>
           </div>
           <div class="col-md-6 col-lg-3 d-flex ftco-animate">
@@ -591,7 +591,7 @@
           			<span class="icon-globe"></span>
           		</div>
           		<h3 class="mb-4">Website</h3>
-	            <p><a href="#">yoursite.com</a></p>
+	            <p><a href="#">{{ $about->porto }}</a></p>
 	          </div>
           </div>
         </div>
@@ -633,7 +633,7 @@
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
               <h2 class="ftco-heading-2">About</h2>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+              <p>{{ $about->description }}</p>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                 <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                 <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -670,9 +670,9 @@
             	<h2 class="ftco-heading-2">Have a Questions?</h2>
             	<div class="block-23 mb-3">
 	              <ul>
-	                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
+	                <li><span class="icon icon-map-marker"></span><span class="text">{{ $about->address }}</span></li>
+	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">{{ $about->telp }}</span></a></li>
+	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">{{ $about->email }}</span></a></li>
 	              </ul>
 	            </div>
             </div>

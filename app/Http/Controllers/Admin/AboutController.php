@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Blog;
 use App\Models\About;
 
-class HomeController extends Controller
+class AboutController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $about = About::where('is_active', 1)->first();
-        $blogs = Blog::where('is_active', 1)->limit(3)->inRandomOrder()->get();
-        return view('home.index', compact('blogs', 'about'));
+        $title = 'Data';
+        $abouts = About::get();
+        return view('admin.about.index', compact('title', 'abouts'));
     }
 
     /**
@@ -23,7 +23,8 @@ class HomeController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Create New Data';
+        return view('admin.about.create', compact('title'));
     }
 
     /**
@@ -37,11 +38,9 @@ class HomeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(blog $blog)
+    public function show(string $id)
     {
-
-        // dd($blog);
-        return view('home.detail', compact('blog'));
+        //
     }
 
     /**
