@@ -1,6 +1,6 @@
 @extends('layouts.admin_template')
 
-@section('title', 'Data Blog')
+@section('title', 'Data')
 
 @section('content')
     <div class="row">
@@ -12,7 +12,7 @@
                     </div>
                     <div class="card-body">
                         <div align='right' class="mb-3">
-                            <a href="{{ route('blog.create') }}" class="btn btn-primary">Create New Blog</a>
+                            <a href="{{ route('about.create') }}" class="btn btn-primary">Create New Blog</a>
                         </div>
                         <table class="table table-bordered table-striped tblack" style="color: #000 !important;">
                             <thead>
@@ -53,8 +53,8 @@
                                                 alt=""></td> --}}
                                         <td class="text-center">
                                             <a class="btn btn-primary btn-sm mx-1"
-                                                href="{{ route('blog.edit', $about->id) }}">Edit</a>
-                                            <form action="{{ route('blog.destroy', $about->id) }}" method="post"
+                                                href="{{ route('about.edit', $about->id) }}">Edit</a>
+                                            <form action="{{ route('about.destroy', $about->id) }}" method="post"
                                                 class="d-inline">
                                                 @csrf
                                                 @method('delete')
