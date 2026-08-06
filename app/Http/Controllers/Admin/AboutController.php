@@ -98,7 +98,6 @@ class AboutController extends Controller
 
         // Change 'about.index' to your actual redirect route
         return redirect()->route('about.index')->with('success', 'Data updated successfully.');
-
     }
 
     /**
